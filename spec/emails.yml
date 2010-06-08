@@ -1,0 +1,131 @@
+---
+:gmail:
+  :reply_text:
+    Ok, I'm sayin' Friday at 7pm.  Let the dorking commence!
+  :headers:
+    message_id:
+      <AANLkTinVIyGS4MHiwUMu4Mo5LjPybutttacofWZZb@mail.gmail.com>
+    body: |
+      Ok, I'm sayin' Friday at 7pm.  Let the dorking commence!
+      
+      On Tue, Jun 8, 2010 at 10:19 AM, Jang Bifflez <
+      jang@bifflez.com> wrote:
+
+      > Thank you for your input on this issue.
+      >
+      > I am in total agreement. I have gotten the approval of the client.
+      >
+      > Best,
+      > Jang
+:yahoo:
+  :reply_text:
+    What is the strength of the snake wizard?
+  :headers:
+    message_id:
+      <AANLkTinVIyGwikipediaHiwPybutttacofWZZb@yahoos.com>
+    body: |
+      What is the strength of the snake wizard?
+
+      ________________________________
+      From: "Bongo Pizza&#269;i&#363;t&#279;-Ferengi" <bongo.pizza@yahoo.com>
+      To: bifflez@jangtown.com
+      Cc: Donkey Car <donkey@car.com>
+      Sent: Thu, April 1, 2010 1:52:09 PM
+      Subject: Re: hay guys
+
+      I figured it out. 
+      Additional question - can I challenge the snake wizard?
+:hotmail:
+  :reply_text:
+    thanks for the quote. how much for just a jingle?
+  :headers:
+    return_path:
+      <skeletor@hotmail.com>
+    body: |
+      thanks for the quote. how much for just a jingle?
+      
+      Date: Mon, 8 Feb 2010 18:26:27 +0000
+      From: skeletor@hotmail.com
+      To: philcollins@hotmail.com
+      Subject: theme song for axis of evil
+      Hi skeletor=2C
+
+      I charge 900 million a day
+
+      Thanks=2C
+
+      phil 		 	   		 =20
+      _________________________________________________________________
+      Your E-mail and More On-the-Go. Get Windows Live Hotmail Free.
+      https://signup.live.com/signup.aspx?id=3D60969=
+:aol_webmail:
+  :reply_text:
+    Cats in buckets! Oh my!
+  :headers:
+    body: |
+      Cats in buckets! Oh my!
+
+      -----Original Message-----
+      From: bobthevet@animalresearchhouse.co.uk
+      To: concernedcatlady@aol.com
+      Sent: Wed, Apr 28, 2010 9:52 am
+      Subject: catastrophe
+
+      Hello,
+      there are cats in buckets over here
+      Thanks!
+    x_mailer:
+      AOL Webmail 31509-STANDARD
+:generic:
+  :reply_text:
+    What do you mean yer all out of ham?!?!?
+  :rest_of_thread: |
+    ----- Original Message -----
+    From: jimmy dean <jimmydean@sausages.com>
+    To: charles darwin
+    Sent: Sun Jun 28 18:15:32 2009
+    Subject: Re: origin of meat
+
+    Hi charles,
+
+    I was wondering if you knew the origin of meat species, in particular ham.
+
+    I am all out of ham and was wondering how to procure some more
+    
+  :headers:
+    body: |
+      What do you mean yer all out of ham?!?!?
+      ----- Original Message -----
+      From: jimmy dean <jimmydean@sausages.com>
+      To: charles darwin
+      Sent: Sun Jun 28 18:15:32 2009
+      Subject: Re: origin of meat
+
+      Hi charles,
+      
+      I was wondering if you knew the origin of meat species, in particular ham.
+      
+      I am all out of ham and was wondering how to procure some more
+:multiple_replies:
+  :reply_text:
+    i refuse to endorse that product. it never worked for me
+  :headers:
+    body: |
+      i refuse to endorse that product. it never worked for me
+
+      ----- Original Message -----
+      From: luke skywalker <luke@jedi.com>
+      To: darth vader
+      Sent: Sun Jun 28 18:15:32 2009
+      Subject: fwd: vicks vaporub
+
+      hey vader,
+      
+      palpatine wants to know if you are gonna shoot that commercial for the VapoRub decogestant
+      
+      luke
+      
+      On Tue, Jun 8, 2010 at 10:19 AM, Jang Bifflez <
+      palpatine@thedarkside.com> wrote:
+
+      > can you ask vader if he wants to go through with that gig at Vicks VapoRub

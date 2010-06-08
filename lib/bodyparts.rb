@@ -1,52 +1,37 @@
 require 'mail'
 
 class BodyParts
-  def find_reply_in(email)
+  def self.find_reply_in(email)
     email = Mail::Message.new(email) unless email.class == Mail::Message
     message_id = email.message_id
-    debugger
     x_mailer = email['x-mailer']
-    
+
     rules = [
-      { :server => 'Gmail', 
-        :identifier => lambda { message_id =~ /gmail/}, 
-        :reply_delimiter => /^.*#{@from_name}\s+<#{@from_address}>\s*wrote:.*$/ 
+      { :server => 'Gmail',
+        :reply_delimiter => /^On.*?wrote:.$/m
       },
-      { :server => 'Yahoo! Mail', 
-        :identifier => lambda { message_id =~ /.+yahoo\.com>\z/}, 
-        :reply_delimiter => /^_+\nFrom: #{@from_name} <#{@from_address}>$/ 
+      { :server => 'Yahoo! Mail',
+        :reply_delimiter => /^_+\r\nFrom:/
       },
-      { :server => 'Microsoft Live Mail/Hotmail', 
-        :identifier => lambda { email['return-path'] =~ /<.+@(hotmail|live).com>/}, 
-        :reply_delimiter =>  /^Date:.+\nSubject:.+\nFrom: #{@from_address}$/ 
+      { :server => 'Microsoft Live Mail/Hotmail',
+        :reply_delimiter =>  /\r\n\r\n(Date|Subject):/
       },
-      { :server => 'Outlook Express', 
-        :identifier => lambda { x_mailer =~ /Microsoft Outlook Express/ }, 
-        :reply_delimiter =>  /^----- Original Message -----$/
-      },
-      { :server =>  'Outlook', 
-        :identifier => lambda { x_mailer =~ /Microsoft Office Outlook/ }, 
-        :reply_delimiter => /^\s*_+\s*\nFrom: #{@from_name}.*$/ 
-      },
-      { :server => nil, 
-        :identifier => lambda { true }, 
-        :reply_delimiter =>  /^.*#{@from_address}.*$/ 
+      { :server => 'Outlook Express/AOL Webmail',
+        :reply_delimiter =>  /^-+.*Original Message.*-+/
       }
     ]
 
-    notes = email.body.to_s
-
-    rules.find do |rule|
-      if rule[:identifier].call
-        reply_match = email.body.match(rule[:reply_delimiter])
-        if reply_match
-          notes = email.body[0, reply_match.begin(0)]
-          source = rule[:server]
-          next true
-        end
-      end
+    if email.multipart?
+      body = email.parts.first.body.raw_source
+    else
+      body = email.body.raw_source
     end
     
-    [notes.strip, source ||= nil]
+    matches = []
+    rules.each {|rule| matches << body.match(rule[:reply_delimiter])}
+    matches.compact!
+    match = matches.sort_by {|m| m.begin(0)}.first
+    new_message = body[0, match.begin(0)]
+    {:new_message => new_message.strip, :rest_of_thread => body[match.begin(0)..-1].strip}
   end
 end
