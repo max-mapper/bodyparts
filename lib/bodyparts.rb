@@ -27,11 +27,13 @@ class BodyParts
       body = email.body.raw_source
     end
     
-    matches = []
-    rules.each {|rule| matches << body.match(rule[:reply_delimiter])}
-    matches.compact!
-    match = matches.sort_by {|m| m.begin(0)}.first
-    new_message = body[0, match.begin(0)]
-    {:new_message => new_message.strip, :rest_of_thread => body[match.begin(0)..-1].strip}
+    matches = rules.map {|rule| body.match(rule[:reply_delimiter])}.compact!
+    unless matches.empty?
+      match = matches.sort_by {|m| m.begin(0)}.first
+      new_message = body[0, match.begin(0)]
+      {:new_message => new_message.strip, :rest_of_thread => body[match.begin(0)..-1].strip}
+    else
+      body
+    end
   end
 end
