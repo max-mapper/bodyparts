@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{bodyparts}
-  s.version = "0.0.0"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Max Ogden"]
@@ -23,8 +23,10 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "bodyparts.gemspec",
      "lib/bodyparts.rb",
      "spec/bodyparts_spec.rb",
+     "spec/emails.yml",
      "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/maxogden/bodyparts}
