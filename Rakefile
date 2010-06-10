@@ -5,12 +5,13 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "bodyparts"
-    gem.summary = %Q{Separates new messages from included reply chains in the body of forwarded emails}
-    gem.description = %Q{Separates new messages from included reply chains in the body of forwarded emails}
+    gem.summary = %Q{Separates new messages from included reply chains in the body of emails}
+    gem.description = %Q{Separates new messages from included reply chains in the body of emails}
     gem.email = "max@maxogden.com"
     gem.homepage = "http://github.com/maxogden/bodyparts"
     gem.authors = ["Max Ogden"]
     gem.add_dependency "mail", ">= 0"
+    gem.add_dependency "tmail", ">= 0"
     gem.add_development_dependency "rspec", ">= 1.2.9"
   end
   Jeweler::GemcutterTasks.new

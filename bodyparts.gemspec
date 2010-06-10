@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{bodyparts}
-  s.version = "0.1.1"
+  s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Max Ogden"]
-  s.date = %q{2010-06-08}
-  s.description = %q{Separates new messages from included reply chains in the body of forwarded emails}
+  s.date = %q{2010-06-10}
+  s.description = %q{Separates new messages from included reply chains in the body of emails}
   s.email = %q{max@maxogden.com}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.6}
-  s.summary = %q{Separates new messages from included reply chains in the body of forwarded emails}
+  s.summary = %q{Separates new messages from included reply chains in the body of emails}
   s.test_files = [
     "spec/bodyparts_spec.rb",
      "spec/spec_helper.rb"
@@ -45,13 +45,16 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<mail>, [">= 0"])
+      s.add_runtime_dependency(%q<tmail>, [">= 0"])
       s.add_development_dependency(%q<rspec>, [">= 1.2.9"])
     else
       s.add_dependency(%q<mail>, [">= 0"])
+      s.add_dependency(%q<tmail>, [">= 0"])
       s.add_dependency(%q<rspec>, [">= 1.2.9"])
     end
   else
     s.add_dependency(%q<mail>, [">= 0"])
+    s.add_dependency(%q<tmail>, [">= 0"])
     s.add_dependency(%q<rspec>, [">= 1.2.9"])
   end
 end
