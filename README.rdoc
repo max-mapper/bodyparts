@@ -4,7 +4,7 @@ Separates new messages from included reply chains in the body of forwarded email
 
 == Usage
 
-BodyParts.find_reply_in( valid raw_email_source or Mail object)
+BodyParts.find_reply_in( valid raw email string, TMail or Mail object)
 
 == Copyright
 

@@ -16,13 +16,24 @@ class FakeMessage
     }
   end
 
-  def self.new_mail(custom_headers={})
+  def self.new_mail(mail_class, custom_headers={})
     headers = default_mail_headers.merge(custom_headers)
-    mail = Mail.new do
-      text_part do
-        body headers.delete("body")
+    
+    mail = mail_class.new do
+      if mail_class == Mail
+        text_part do
+          body headers.delete("body")
+        end
       end
     end
+    
+    if mail_class == TMail::Mail
+      %w(body from to).each do |attr|
+        mail.send "#{attr}=", headers[attr]
+        headers.delete attr
+      end
+    end
+    
     headers.each {|header, content| mail[header] = content }
     mail
   end
