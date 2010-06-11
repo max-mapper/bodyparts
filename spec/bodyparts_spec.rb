@@ -29,4 +29,10 @@ describe "BodyParts" do
     message = FakeMessage.new_mail(Mail, generic[:headers])
     BodyParts.find_reply_in(message.to_s).should == {:new_message => generic[:reply_text], :rest_of_thread => generic[:rest_of_thread].gsub("\n", "\r\n").strip}
   end
+  
+  it "should return the entire message as a new message if there isn't a reply" do
+    no_reply = FakeMessage.fake_emails[:no_reply]
+    message = FakeMessage.new_mail(Mail, no_reply[:headers])
+    BodyParts.find_reply_in(message.to_s)[:new_message].should == no_reply[:reply_text]
+  end
 end

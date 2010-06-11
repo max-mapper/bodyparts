@@ -46,7 +46,7 @@ class BodyParts
       new_message = body[0, match.begin(0)]
       {:new_message => new_message.strip, :rest_of_thread => body[match.begin(0)..-1].strip}
     else
-      body
+      {:new_message => body, :rest_of_thread => nil}
     end
   end
 end
