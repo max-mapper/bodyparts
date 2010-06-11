@@ -1,0 +1,34 @@
+MIME-Version: 1.0
+Received: by 10.100.134.4 with HTTP; Fri, 11 Jun 2010 13:57:35 -0700 (PDT)
+Date: Fri, 11 Jun 2010 13:57:35 -0700
+Delivered-To: support_development@revelationglobal.com
+Message-ID: <AANLkTinQeQ6gTJa4myYGttnWMHiZUuMVGReSDFgieKFd@mail.gmail.com>
+Subject: test
+From: Support Development <support_development@revelationglobal.com>
+To: Support Development <support_development@revelationglobal.com>
+Content-Type: multipart/mixed; boundary=0016e640d06a7d23c60488c7635f
+
+--0016e640d06a7d23c60488c7635f
+Content-Type: multipart/alternative; boundary=0016e640d06a7d23c00488c7635d
+
+--0016e640d06a7d23c00488c7635d
+Content-Type: text/plain; charset=ISO-8859-1
+
+HELLO
+
+--0016e640d06a7d23c00488c7635d
+Content-Type: text/html; charset=ISO-8859-1
+
+HELLO
+
+--0016e640d06a7d23c00488c7635d--
+--0016e640d06a7d23c60488c7635f
+Content-Type: image/png; name="Screen shot 2010-05-13 at 11.49.10 AM.png"
+Content-Disposition: attachment; 
+	filename="Screen shot 2010-05-13 at 11.49.10 AM.png"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_gabi0qqa0
+
+iVBORw0KGgoAAAANSUhEUgAAAwQAAAE9CAIAAAA6czL5AAAWZGlDQ1BJQ0MgUHJvZmlsZQAAeAHV
+aMqRrNYEzQAAAABJRU5ErkJggg==
+--0016e640d06a7d23c60488c7635f--

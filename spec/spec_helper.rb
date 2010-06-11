@@ -15,6 +15,10 @@ class FakeMessage
       "date" => "Wed, 23 Sep 2009 09:11:23 -0700"
     }
   end
+  
+  def self.load_mail(name)
+    Mail::Message.new(File.read(File.expand_path(File.dirname(__FILE__) + "/#{name}.eml")))
+  end
 
   def self.new_mail(mail_class, custom_headers={})
     headers = default_mail_headers.merge(custom_headers)

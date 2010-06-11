@@ -23,11 +23,10 @@ class BodyParts
   def self.extract_mail_attributes(mail_object)
     message_id = mail_object['message_id']
     x_mailer = mail_object['x-mailer']
-
-    if mail_object.multipart?
-      body = mail_object.parts.first.body.raw_source
+    if mail_object.find_first_mime_type('text/html')
+      body = mail_object.html_part.body.raw_source
     else
-      body = mail_object.body.raw_source
+      body = mail_object.text_part.body.raw_source
     end
     {:message_id => message_id, :x_mailer => x_mailer, :body => body}
   end
@@ -40,6 +39,7 @@ class BodyParts
       else raise "You must pass in either a TMail or Mail object or raw email source text"
     end
     body = mail_attributes[:body]
+
     matches = rules.map {|rule| body.match(rule[:reply_delimiter])}.compact!
     unless matches.empty?
       match = matches.sort_by {|m| m.begin(0)}.first

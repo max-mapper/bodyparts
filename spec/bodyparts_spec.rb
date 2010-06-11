@@ -35,4 +35,10 @@ describe "BodyParts" do
     message = FakeMessage.new_mail(Mail, no_reply[:headers])
     BodyParts.find_reply_in(message.to_s)[:new_message].should == no_reply[:reply_text]
   end
+  
+  it "should correctly parse the body from messages that contain attachments" do
+    with_attachment = FakeMessage.fake_emails[:with_attachment]
+    message = FakeMessage.load_mail(with_attachment[:filename])
+    BodyParts.find_reply_in(message)[:new_message].should == with_attachment[:reply_text]
+  end
 end
