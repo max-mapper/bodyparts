@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{bodyparts}
-  s.version = "0.1.4"
+  s.version = "0.1.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Max Ogden"]
@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
      "bodyparts.gemspec",
      "lib/bodyparts.rb",
      "spec/bodyparts_spec.rb",
+     "spec/email_with_attachment.eml",
      "spec/emails.yml",
      "spec/spec_helper.rb"
   ]
