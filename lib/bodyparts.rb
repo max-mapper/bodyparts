@@ -11,7 +11,7 @@ class BodyParts
   
   def self.extract_tmail_attributes(tmail_object)
     if mail_encoding = tmail_object['content_transfer_encoding']
-      content_encoding = mail_encoding.to_s
+      content_encoding = mail_encoding.to_s.downcase
     else
       content_encoding = "not known"
     end
@@ -50,10 +50,11 @@ class BodyParts
       else raise "You must pass in either a TMail or Mail object or raw email source text"
     end
     
-    body = mail_attributes[:body]
-    
-    if mail_attributes[:content_encoding] == 'base64'
-      body = Base64.decode64 body
+    raw_body = mail_attributes[:body]
+    body = case mail_attributes[:content_encoding]
+      when "base64" then Base64.decode64 raw_body
+      when "quoted-printable" then Mail::Encodings::QuotedPrintable.decode raw_body
+      else raw_body
     end
 
     matches = rules.map {|rule| body.match(rule[:reply_delimiter])}.compact!

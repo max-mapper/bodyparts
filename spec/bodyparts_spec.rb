@@ -41,11 +41,15 @@ describe "BodyParts" do
     BodyParts.find_reply_in(message)[:new_message].should == with_attachment[:reply_text]
   end
   
-  [TMail::Mail, Mail].each do |mail_type|
-    it "should correctly parse base64 encoded #{mail_type} messages" do
-      base64_encoded = FakeMessage.fake_emails[:base64_encoded]
-      message = FakeMessage.new_mail(mail_type, base64_encoded[:headers])
-      BodyParts.find_reply_in(message)[:new_message].should == base64_encoded[:reply_text]
-    end
+  describe "encodings" do  
+    [TMail::Mail, Mail].each do |mail_type|
+      ["base64", "Quoted-printable"].each do |encoding|
+        it "should correctly parse #{encoding} encoded #{mail_type} messages" do
+          encoded_message = FakeMessage.fake_emails[encoding.to_sym]
+          message = FakeMessage.new_mail(mail_type, encoded_message[:headers])
+          BodyParts.find_reply_in(message)[:new_message].strip.should == encoded_message[:reply_text]
+        end
+      end
+    end      
   end
 end

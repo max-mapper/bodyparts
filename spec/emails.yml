@@ -140,7 +140,7 @@
     "email_with_attachment"
   :reply_text:
     HELLO
-:base64_encoded:
+:base64:
   :reply_text:
     INSTAIN REPLY. DO WAY
   :headers:
@@ -148,3 +148,12 @@
       base64
     body:
       SU5TVEFJTiBSRVBMWS4gRE8gV0FZ\n
+:"Quoted-printable":
+  :reply_text:
+    To make your upload take a significantly less amount of time, you can use Windows Movie Maker to shrink your video before uploading it.
+  :headers:
+    content_transfer_encoding:
+      Quoted-printable
+    body: |
+      To make your upload take a significantly less amount of time, you can use W=
+      indows Movie Maker to shrink your video before uploading it.=20
