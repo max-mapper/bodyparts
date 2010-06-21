@@ -10,37 +10,54 @@ class BodyParts
   end
   
   def self.extract_tmail_attributes(tmail_object)
-    message_id = tmail_object.message_id
-    x_mailer = tmail_object['x-mailer'].to_s
+    if mail_encoding = tmail_object['content_transfer_encoding']
+      content_encoding = mail_encoding.to_s
+    else
+      content_encoding = "not known"
+    end
+    
     body = if tmail_object.multipart?
       tmail_object.parts.first.body
     else
       tmail_object.body
     end
-    {:message_id => message_id, :x_mailer => x_mailer, :body => body}
+    
+    {:content_encoding => content_encoding, :body => body}
   end
   
   def self.extract_mail_attributes(mail_object)
-    message_id = mail_object['message_id']
-    x_mailer = mail_object['x-mailer']
+    if mail_encoding = mail_object['content_transfer_encoding']
+      content_encoding = mail_encoding.encoding
+    else
+      content_encoding = "not known"
+    end
+    
     if mail_object.find_first_mime_type('text/plain')
       body = mail_object.text_part.body.raw_source
     else
       body = mail_object.body.raw_source
     end
-    {:message_id => message_id, :x_mailer => x_mailer, :body => body}
+
+    {:content_encoding => content_encoding, :body => body}
   end
   
   def self.find_reply_in(email)
     email = Mail::Message.new(email) if email.is_a? String
+    
     mail_attributes = case email.class.to_s
       when "TMail::Mail" then extract_tmail_attributes(email)
       when "Mail::Message" then extract_mail_attributes(email)
       else raise "You must pass in either a TMail or Mail object or raw email source text"
     end
+    
     body = mail_attributes[:body]
+    
+    if mail_attributes[:content_encoding] == 'base64'
+      body = Base64.decode64 body
+    end
 
     matches = rules.map {|rule| body.match(rule[:reply_delimiter])}.compact!
+    
     unless matches.empty?
       match = matches.sort_by {|m| m.begin(0)}.first
       new_message = body[0, match.begin(0)]

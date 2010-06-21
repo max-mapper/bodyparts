@@ -1,7 +1,6 @@
 require 'spec'
 require File.expand_path(File.dirname(__FILE__) + '/../lib/bodyparts.rb')
 
-
 class FakeMessage
   def self.fake_emails
     YAML.load_file(File.expand_path(File.dirname(__FILE__) + '/emails.yml'))
@@ -26,7 +25,7 @@ class FakeMessage
     mail = mail_class.new do
       if mail_class == Mail
         text_part do
-          body headers.delete("body")
+          body headers.delete "body"
         end
       end
     end

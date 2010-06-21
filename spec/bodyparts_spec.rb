@@ -1,7 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "BodyParts" do
-  
   [TMail::Mail, Mail].each do |mail_object|
     it "should accept and parse #{mail_object} objects as input" do
       generic = FakeMessage.fake_emails[:generic]
@@ -9,7 +8,7 @@ describe "BodyParts" do
       BodyParts.find_reply_in(message)[:new_message].should == generic[:reply_text]
     end
   end
-
+  
   %w(gmail yahoo hotmail aol_webmail generic).each do |mail_server|
     it "should strip out the replies from a #{mail_server} message containing forwarded junk" do
       mail_server = FakeMessage.fake_emails[mail_server.to_sym]
@@ -40,5 +39,13 @@ describe "BodyParts" do
     with_attachment = FakeMessage.fake_emails[:with_attachment]
     message = FakeMessage.load_mail(with_attachment[:filename])
     BodyParts.find_reply_in(message)[:new_message].should == with_attachment[:reply_text]
+  end
+  
+  [TMail::Mail, Mail].each do |mail_type|
+    it "should correctly parse base64 encoded #{mail_type} messages" do
+      base64_encoded = FakeMessage.fake_emails[:base64_encoded]
+      message = FakeMessage.new_mail(mail_type, base64_encoded[:headers])
+      BodyParts.find_reply_in(message)[:new_message].should == base64_encoded[:reply_text]
+    end
   end
 end

@@ -140,3 +140,11 @@
     "email_with_attachment"
   :reply_text:
     HELLO
+:base64_encoded:
+  :reply_text:
+    INSTAIN REPLY. DO WAY
+  :headers:
+    content_transfer_encoding:
+      base64
+    body:
+      SU5TVEFJTiBSRVBMWS4gRE8gV0FZ\n
