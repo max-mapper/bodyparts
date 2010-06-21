@@ -26,19 +26,19 @@ class BodyParts
   end
   
   def self.extract_mail_attributes(mail_object)
-    if mail_encoding = mail_object['content_transfer_encoding']
+    if mail_object.find_first_mime_type('text/plain')
+      part = mail_object.text_part
+    else
+      part = mail_object
+    end
+    
+    if mail_encoding = part['content_transfer_encoding'] || mail_encoding = mail_object['content_transfer_encoding']
       content_encoding = mail_encoding.encoding
     else
       content_encoding = "not known"
     end
-    
-    if mail_object.find_first_mime_type('text/plain')
-      body = mail_object.text_part.body.raw_source
-    else
-      body = mail_object.body.raw_source
-    end
 
-    {:content_encoding => content_encoding, :body => body}
+    {:content_encoding => content_encoding, :body => part.body.raw_source}
   end
   
   def self.find_reply_in(email)

@@ -1,6 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "BodyParts" do
+
   [TMail::Mail, Mail].each do |mail_object|
     it "should accept and parse #{mail_object} objects as input" do
       generic = FakeMessage.fake_emails[:generic]
@@ -35,7 +36,7 @@ describe "BodyParts" do
     BodyParts.find_reply_in(message.to_s)[:new_message].should == no_reply[:reply_text]
   end
   
-  it "should correctly parse the body from messages that contain attachments" do
+  it "should parse quoted printable messages" do
     with_attachment = FakeMessage.fake_emails[:with_attachment]
     message = FakeMessage.load_mail(with_attachment[:filename])
     BodyParts.find_reply_in(message)[:new_message].should == with_attachment[:reply_text]
@@ -44,12 +45,18 @@ describe "BodyParts" do
   describe "encodings" do  
     [TMail::Mail, Mail].each do |mail_type|
       ["base64", "Quoted-printable"].each do |encoding|
-        it "should correctly parse #{encoding} encoded #{mail_type} messages" do
+        it "should correctly parse #{mail_type} objects where the entire message is encoded as #{encoding}" do
           encoded_message = FakeMessage.fake_emails[encoding.to_sym]
           message = FakeMessage.new_mail(mail_type, encoded_message[:headers])
           BodyParts.find_reply_in(message)[:new_message].strip.should == encoded_message[:reply_text]
         end
+
+        it "should correctly parse #{mail_type} objects where only the individual parts are encoded as #{encoding}"do
+          quoted_printable = FakeMessage.fake_emails[:individual_parts_quoted_printable]
+          message = FakeMessage.load_mail(quoted_printable[:filename])
+          BodyParts.find_reply_in(message)[:new_message].should == quoted_printable[:reply_text].gsub("\n", "\r\n").strip
+        end
       end
-    end      
+    end
   end
 end
