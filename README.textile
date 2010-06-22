@@ -47,15 +47,15 @@ Given that you have the following raw email string stored in the variable @messa
   </code>
 </pre>
 
-If you run @BodyParts.find_reply_in message @ you will receive the following as output:
+If you run <code>BodyParts.find_reply_in message</code> you will receive the following as output:
 
 <pre>
-  <code>
+<code>
     {
       :new_message    => "i saw on the news this mroing", 
-      :rest_of_thread => "On Tue, Jun 22, 2010 at 10:36 AM, Max Ogden <mogden@gmail.com> wrote:\r\n\r\n> how girl get pragnent?"
+      :rest_of_thread => "On Tue, Jun 22, 2010 at 10:36 AM, Max Ogden <mogden@gmail.com> wrote:> how girl get pragnent?"
     }
-  </code>
+</code>
 </pre>
 
 h2. Copyright
