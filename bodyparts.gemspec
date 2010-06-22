@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{bodyparts}
-  s.version = "0.1.9"
+  s.version = "1.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Max Ogden"]
-  s.date = %q{2010-06-21}
+  s.date = %q{2010-06-22}
   s.description = %q{Separates new messages from included reply chains in the body of emails}
   s.email = %q{max@maxogden.com}
   s.extra_rdoc_files = [

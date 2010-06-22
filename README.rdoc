@@ -1,11 +1,64 @@
-= bodyparts
+<h1>BodyParts</h1> Splits the body of replied email messages into the actual new message and the included reply chain.
 
-Separates new messages from included reply chains in the body of forwarded emails
-
-== Usage
+h2. Usage
 
 BodyParts.find_reply_in( valid raw email string, TMail or Mail object)
 
-== Copyright
+h2. Example
+
+Given that you have the following raw email string stored in the variable @message@:
+
+<pre>
+  <code>
+    MIME-Version: 1.0
+    Received: by 10.231.176.6 with HTTP; Tue, 22 Jun 2010 10:37:09 -0700 (PDT)
+    In-Reply-To: <AANLkTilVGBfgiQr1vdF17qit8eyZ3nwYjqg3nDCiRknZ@mail.gmail.com>
+    References: <AANLkTilVGBfgiQr1vdF17qit8eyZ3nwYjqg3nDCiRknZ@mail.gmail.com>
+    Date: Tue, 22 Jun 2010 10:37:09 -0700
+    Delivered-To: mogden@gmail.com
+    Message-ID: <AANLkTil7bf681WP6s5NTEyZeCVBtfL_DI6mdjXN9ZeTR@mail.gmail.com>
+    Subject: Re: how is babby formed?
+    From: Max Ogden <mogden@gmail.com>
+    To: Max Ogden <mogden@gmail.com>
+    Content-Type: multipart/alternative; boundary=0016361e87c2efdb680489a1de8e
+
+    --0016361e87c2efdb680489a1de8e
+    Content-Type: text/plain; charset=ISO-8859-1
+
+    i saw on the news this mroing
+
+    On Tue, Jun 22, 2010 at 10:36 AM, Max Ogden <mogden@gmail.com> wrote:
+
+    > how girl get pragnent?
+
+    --0016361e87c2efdb680489a1de8e
+    Content-Type: text/html; charset=ISO-8859-1
+    Content-Transfer-Encoding: quoted-printable
+
+    i saw on the news this mroing<br><br><div class=3D"gmail_quote">On Tue, Jun=
+     22, 2010 at 10:36 AM, Max Ogden <span dir=3D"ltr">&lt;<a href=3D"mailto:mo=
+    gden@gmail.com">mogden@gmail.com</a>&gt;</span> wrote:<br><blockquote class=
+    =3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padd=
+    ing-left:1ex;">
+    how girl get pragnent?
+    </blockquote></div><br>
+
+    --0016361e87c2efdb680489a1de8e--
+  </code>
+</pre>
+
+If you run @BodyParts.find_reply_in message @ you will receive the following as output:
+
+<pre>
+  <code>
+    {
+      :new_message    => "i saw on the news this mroing", 
+      :rest_of_thread => "On Tue, Jun 22, 2010 at 10:36 AM, Max Ogden <mogden@gmail.com> wrote:\r\n\r\n> how girl get pragnent?"
+    }
+  </code>
+</pre>
+
+h2. Copyright
 
 Copyright (c) 2010 Max Ogden. See LICENSE for details.
+

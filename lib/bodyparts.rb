@@ -26,8 +26,8 @@ class BodyParts
   end
   
   def self.extract_mail_attributes(mail_object)
-    if mail_object.find_first_mime_type('text/plain')
-      part = mail_object.text_part
+    if plain_part = mail_object.find_first_mime_type('text/plain')
+      part = plain_part
     else
       part = mail_object
     end
